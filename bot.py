@@ -19,9 +19,10 @@ class Bot:
         self.updater.idle()
 
     def _message_handler(self, update, context):
-        """Main messages handler"""
-        self.send_text(update, f'Your original message: {update.message.text}')
+         QuoteBot._message_handler(self, update, context)
 
+    #     """Main messages handler"""
+    #     self.send_text(update, f'Your original message: {update.message.text}')
     def send_video(self, update, context, file_path):
         """Sends video to a chat"""
         context.bot.send_video(chat_id=update.message.chat_id, video=open(file_path, 'rb'), supports_streaming=True)
@@ -37,6 +38,7 @@ class QuoteBot(Bot):
         to_quote = True
 
         if update.message.text == 'Don\'t quote me please':
+            print("hey")
             to_quote = False
 
         self.send_text(update, f'Your original message: {update.message.text}', quote=to_quote)
@@ -52,4 +54,3 @@ if __name__ == '__main__':
 
     my_bot = Bot(_token)
     my_bot.start()
-
