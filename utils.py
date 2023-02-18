@@ -1,4 +1,4 @@
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 
 
 def search_download_youtube_video(video_name, num_results=1):
@@ -13,3 +13,8 @@ def search_download_youtube_video(video_name, num_results=1):
 
     return [ydl.prepare_filename(video) for video in videos]
 
+def youtube_video_name(video_name, num_results = 1):
+    videoName = ""
+    with YoutubeDL() as ydl:
+        videoName = ydl.extract_info(f"ytsearch{num_results}:{video_name}", download=False)['entries']
+    return videoName
