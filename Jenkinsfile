@@ -10,7 +10,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'TELEGRAM', passwordVariable: 'TELEGRAM_TOKEN', usernameVariable: 'NO_NEED')]) {
                     sh 'echo "${TELEGRAM_TOKEN}" > .telegramToken'
                 }
-        }        
+            }
+        }            
         stage('Build') {
             steps {
                 sh 'docker build -t $DOCKER_IMAGE .'
