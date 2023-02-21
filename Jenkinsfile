@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Tag') {
             steps {
-                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE'
+                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:${env.BUILD_NUMBER}'
             }
         }
         stage('Login') {
