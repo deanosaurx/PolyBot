@@ -31,10 +31,10 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-                withDockerRegistry([credentialsId: "DOCKER_HUB", url: "https://index.docker.io/v1/"]) {
-                    bat "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE"
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                    sh "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE"
                 }
-            }
+            }                
         }
     }
 }
