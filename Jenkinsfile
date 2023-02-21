@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'polybot'
-        DOCKER_HUB_REPO = 'deanosaurx/jenkins-polybot'
+        DOCKER_HUB_REPO = 'deanosaurx/polybot'
     }
     stages {
         stage('telegram') {
