@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'polybot'
+        DOCKER_IMAGE = 'jenkins-polybot'
         DOCKER_HUB_REPO = 'deanosaurx'
     }
     stages {
