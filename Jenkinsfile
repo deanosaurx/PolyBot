@@ -28,13 +28,13 @@ pipeline {
                     sh "sudo docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
                 }
             }
+        }
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry([credentialsId: "DOCKER_HUB", url: "https://index.docker.io/v1/"]) {
                     bat "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE"
                 }
             }
-        }
         }
     }
 }
