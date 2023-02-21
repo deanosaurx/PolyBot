@@ -25,3 +25,5 @@ If your machine is based on arm64 (m1 mac, etc..) run this instead
 ```bash
 docker run -d --platform linux/arm64 --restart always --name polybot docker.io/deanosaurx/polybot
 ```
+
+
