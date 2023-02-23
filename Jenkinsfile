@@ -30,11 +30,11 @@ pipeline {
         }
         stage('Clean up Docker images') {
             steps {
-                sh 'docker image prune -af'
+                sh 'sudo docker image prune -af'
             }
             post {
                 always {
-                    sh 'docker image prune -af'
+                    sh 'sudo docker image prune -af'
                 }
             }
         }
