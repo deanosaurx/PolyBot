@@ -12,21 +12,13 @@ pipeline {
                 }
             }
         }            
-        stage('Build') {
-            steps {
-                sh 'sudo docker build -t $DOCKER_IMAGE .'
-            }
-        }
-        stage('Tag') {
-            steps {
-                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:${BUILD_NUMBER}'
-            }
-        }
-        stage('Login') {
+        stage('Docker Login & Build') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                     sh "sudo docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
                 }
+                sh 'sudo docker build -t $DOCKER_IMAGE .'
+                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:${BUILD_NUMBER}'
             }
         }
         stage('Push Docker Image') {
@@ -35,6 +27,16 @@ pipeline {
                     sh "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE:${BUILD_NUMBER}"
                 }
             }                
+        }
+        stage('Clean up Docker images') {
+            steps {
+                sh 'docker image prune -af'
+            }
+            post {
+                always {
+                    sh 'docker image prune -af'
+                }
+            }
         }
     }
 }
