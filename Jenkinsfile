@@ -19,7 +19,7 @@ pipeline {
                 }
                 sh 'sudo docker build -t $DOCKER_IMAGE .'
                 sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:latest'
-                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:${BUILD_NUMBER}'
+                sh 'sudo docker tag $DOCKER_IMAGE $DOCKER_HUB_REPO/$DOCKER_IMAGE:polybot-${BUILD_NUMBER}'
             }
         }
         stage('Push Docker Image') {
