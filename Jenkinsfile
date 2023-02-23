@@ -24,6 +24,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                    sh "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE"
                     sh "sudo docker push $DOCKER_HUB_REPO/$DOCKER_IMAGE:${BUILD_NUMBER}"
                 }
             }                
