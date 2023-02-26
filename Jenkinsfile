@@ -11,7 +11,7 @@ pipeline {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
     }
-    stages
+    stages {
         stage('telegram') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'TELEGRAM', passwordVariable: 'TELEGRAM_TOKEN', usernameVariable: 'NO_NEED')]) {
@@ -48,3 +48,4 @@ pipeline {
             }
         }
     }
+}
