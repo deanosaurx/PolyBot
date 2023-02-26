@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'deanosaurx/jenkins-agent:latest'
+            label 'jenkins-agent'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
             }
         }
