@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'deanosaurx/jenkins-agent:latest'
-            label 'jenkins-agent'
             args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
             }
         }
@@ -12,7 +11,7 @@ pipeline {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
     }
-    stages {
+    stages git p
         stage('telegram') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'TELEGRAM', passwordVariable: 'TELEGRAM_TOKEN', usernameVariable: 'NO_NEED')]) {
