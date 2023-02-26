@@ -11,6 +11,10 @@ pipeline {
         disableConcurrentBuilds()
         timeout(time: 10, unit: 'MINUTES')
     }
+    environment {
+        DOCKER_IMAGE = 'jenkins-polybot'
+        DOCKER_HUB_REPO = 'deanosaurx'
+    }
     stages {
         stage('telegram') {
             steps {
