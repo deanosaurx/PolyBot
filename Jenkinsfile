@@ -1,8 +1,15 @@
 pipeline {
-    agent any
-    environment {
-        DOCKER_IMAGE = 'jenkins-polybot'
-        DOCKER_HUB_REPO = 'deanosaurx'
+    agent {
+        docker {
+            image 'deanosaurx/jenkins-agent:latest'
+            args  '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+            }
+        }
+    options {
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '30'))
+        disableConcurrentBuilds()
+        timeout(time: 10, unit: 'MINUTES')
     }
     stages {
         stage('telegram') {
